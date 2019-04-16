@@ -22,6 +22,7 @@
 #include <iomanip>
 #include <iostream>
 #include <thread>
+#include <ctime>
 
 #include "acquisition.h"
 #include "datastore.h"
@@ -409,11 +410,15 @@ void Acquisition::write_data() const {
     }
     else
     {
+      auto timenow =
+                    std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
       std::cout << std::setprecision(significantPlacesFreq)
                 << freq
                 << " "
                 << std::setprecision(significantPlacesPwr)
                 << pwrdb
+                << " "
+                << ctime(&timenow)
                 << std::endl;
     }
   }
